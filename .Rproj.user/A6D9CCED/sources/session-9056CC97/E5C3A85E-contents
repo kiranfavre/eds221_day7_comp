@@ -4,14 +4,92 @@ format: html
 editor: visual
 ---
 
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+# Morning interactive session
+
 ## Joins
 
-### Full join
+```{r}
+animals <- tibble::tribble(
+             ~location,   ~species,  ~maturity,
+              "lagoon",   "bobcat",    "adult",
+               "bluff",   "coyote", "juvenile",
+               "creek",      "fox",    "adult",
+                "oaks", "squirrel", "juvenile",
+               "bluff",   "bobcat",    "adult"
+             )
 
-### Left join
+sites <- tibble::tribble(
+       ~location, ~full_site_name, ~jurisdiction,
+         "beach", "Goleta Beach", "SB City",
+        "lagoon", "UCSB Lagoon", "UCSB",
+         "bluff", "Ellwood Mesa", "SB City",
+          "oaks", "Fremont Campground", "USFS"
+       )
 
-### Inner join
+```
 
-### Semi join
+### Full join: combines all columns
 
-### Anti join
+```{r}
+full_join_example <- full_join(animals, sites) # by = "location if you want to be explicit) 
+```
+
+### Left join: adds new columns to y data table
+
+```{r}
+left_join_example <- left_join(animals, sites)
+```
+
+### Inner join: only keeps columns with matches in x and y
+
+```{r}
+inner_join_example <- inner_join(animals, sites)
+```
+
+What if the keys don't match?
+
+```{r}
+sites_2 <- sites |> 
+  rename(loc = location)
+
+nonmatching <- full_join(animals, sites_2, by = c("location" = "loc"))
+```
+
+### Semi join: does not add new columns
+
+```{r}
+semi_join_example <- semi_join(animals, sites, by = "location")
+```
+
+### Anti join: returns rows of x that does not match in y
+
+```{r}
+anti_join_example <- anti_join(animals, sites, by = "location")
+```
+
+## 
+
+# Refresher 
+
+```{r}
+library(palmerpenguins)
+penguins <- palmerpenguins::penguins
+```
+
+Only include penguins at Biscoe and Dream islands,
+
+```{r}
+Biscoe_Dream_penguins <- penguins |> 
+  filter(island %in% c("Biscoe", "Dream")) |> 
+  select(-year, -sex) |> 
+  mutate(body_mass_kg = body_mass_g / 1000) |> 
+  rename(location = island)
+
+
+```

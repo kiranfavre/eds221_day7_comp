@@ -82,7 +82,7 @@ library(palmerpenguins)
 penguins <- palmerpenguins::penguins
 ```
 
-Only include penguins at Biscoe and Dream islands
+Only include penguins at Biscoe and Dream islands,
 
 ```{r}
 Biscoe_Dream_penguins <- penguins |> 

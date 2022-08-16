@@ -3,9 +3,9 @@
     "path": "~/MEDS 2022-2023/EDS221/eds221_day7_comp/day7_key.qmd",
     "project_path": "day7_key.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "216698786",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1660669533262.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -22,11 +22,11 @@
         "rmdVisualModeLocation": "1816:1478.1817626953125"
     },
     "folds": "",
-    "lastKnownWriteTime": 1660673008,
+    "lastKnownWriteTime": 1660673708,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1660673038166,
+    "last_content_update": 1660673708690,
     "read_only": false,
     "read_only_alternatives": []
 }

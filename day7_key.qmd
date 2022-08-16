@@ -149,3 +149,100 @@ wday(my_bday, label = TRUE)
 
 week(my_bday)
 ```
+
+```{r}
+urchin_counts <- tribble(
+  ~date, ~species, ~size_mm,
+  "10/3/2020", "purple", 55,
+  "10/4/2020", "red", 48,
+  "11/17/2020", "red", 67
+)
+
+#how many were seen each month?
+#have to convert to date and pull out month so we can use it as a grouping variable
+
+urchin_ymd <- urchin_counts |> 
+  mutate(date = mdy(date)) |> 
+  mutate(year = year(date), # makes a year column
+         month = month(date), # makes a month column
+         day = day(date)) # makes a day column
+```
+
+### Intervals
+
+```{r}
+day_1 <- ymd("2020-01-06")
+day_2 <- ymd("2020-05-18")
+
+time_interval <- interval(day_1, day_2)
+
+time_length(time_interval, "year")
+```
+
+## stringr for working with strings using `str_detect`
+
+```{r}
+my_string <- "Batman likes them cheeses"
+
+my_string |> 
+  str_detect("likes") #returns true, looks for this string
+
+my_string |> 
+  str_detect("pup")
+
+new_string <- c("pizza", "pie", "tacos")
+new_string |> 
+  str_detect("pizza")
+```
+
+```{r}
+skywalkers <- starwars |> 
+  filter(str_detect(name, pattern = "Skywalker"))
+#starting from og starwars data frame, only keep rows where pattern skywalker exists in nanme column
+
+#our turn to save anything with Maul in it
+mauls <- starwars |> 
+  filter(str_detect(name, pattern = "Maul"))
+
+#create a subset that keeps rows where blue shows up in the eye color either alone or in combo
+blue_eyes <- starwars |> 
+  filter(str_detect(eye_color, pattern = "blue"))
+```
+
+## str_replace to replace string patterns
+
+```{r}
+firewalkers <- starwars |> #don't forget the mutate function!
+  mutate(name_2 = str_replace(name, pattern = "Sky", replacement = "Fire")) #what will populate the new name column is Fire when it sees sky
+```
+
+Removing white/extra spaces
+
+```{r}
+feedback <- c("I  ate      some   nachos", "   Wednesday          Morning  ")
+str_trim(feedback) #removes exterior white spaces, like by morning^
+str_squish(feedback)
+
+# str_to*
+str_to_lower(feedback)
+str_to_title(feedback)
+str_to_upper(feedback)
+str_to_sentence(feedback)
+
+#from starwars df, create a new dataframe starwars_lc that adds a new column called name_lower containing character names converted to all lower case
+starwars_lc <- starwars |> 
+  mutate(name_lower = str_to_lower(name))
+```
+
+## case_when()
+
+```{r}
+sw_robot <- starwars |> 
+  mutate(robot_status = case_when(
+    species == "Droid" ~ "A ROBOT!!!!",
+    species == "Human" ~ "Issa human!",
+    TRUE ~ "This is something else."
+  )) 
+
+#what's in the new column changes based on what is in the original column
+```

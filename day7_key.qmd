@@ -146,4 +146,6 @@ second(my_time)
 my_bday <- ymd("19991012")
 
 wday(my_bday, label = TRUE)
+
+week(my_bday)
 ```

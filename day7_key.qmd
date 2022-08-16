@@ -97,6 +97,10 @@ Biscoe_Dream_penguins <- penguins |>
 ## Dates and times with `lubridate`
 
 ```{r}
+library(lubridate)
+```
+
+```{r}
 my_date <- "03-15-1998"
 # to use lubridate, must call it and input the format of date given. (either mdy,dmy,ymd). Will return in ISO form
 lubridate::mdy(my_date) 
@@ -109,4 +113,37 @@ lubridate::dmy(date)
 
 date1 <- "19610518"
 lubridate::ymd(date1)
+```
+
+```{r}
+lubridate::ymd("1942-08-30")
+
+lubridate::mdy("09/22/84")
+```
+
+```{r}
+time <- "2020-08-12 11:18"
+time <- lubridate::ymd_hm(time)  #year, month, day, hours, mins
+class(time)
+```
+
+```{r}
+#time zone conversion
+with_tz(time, "America/Los_Angeles")
+
+with_tz(time, "Europe/London")
+
+with_tz(time, "Asia/Jakarta")
+
+my_time <- ymd_hms(time)
+year(my_time)
+day(my_time)
+second(my_time)
+
+```
+
+```{r}
+my_bday <- ymd("19991012")
+
+wday(my_bday, label = TRUE)
 ```

@@ -73,9 +73,7 @@ semi_join_example <- semi_join(animals, sites, by = "location")
 anti_join_example <- anti_join(animals, sites, by = "location")
 ```
 
-## 
-
-# Refresher 
+## Refresher
 
 ```{r}
 library(palmerpenguins)
@@ -92,4 +90,23 @@ Biscoe_Dream_penguins <- penguins |>
   rename(location = island)
 
 
+```
+
+# Afternoon session
+
+## Dates and times with `lubridate`
+
+```{r}
+my_date <- "03-15-1998"
+# to use lubridate, must call it and input the format of date given. (either mdy,dmy,ymd). Will return in ISO form
+lubridate::mdy(my_date) 
+
+my_datee <- "11/07/2003"
+lubridate::dmy(my_datee)
+
+date <- "08-Jun-1974"
+lubridate::dmy(date)
+
+date1 <- "19610518"
+lubridate::ymd(date1)
 ```
